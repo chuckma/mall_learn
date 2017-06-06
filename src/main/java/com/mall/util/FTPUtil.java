@@ -1,7 +1,5 @@
-package com.mall.vo;
+package com.mall.util;
 
-import com.mall.util.PropertiesUtil;
-import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
