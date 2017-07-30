@@ -123,4 +123,12 @@
     FROM mmall_category
     WHERE parent_id = #{parent_id}
   </select>
+
+  <select id="selectList" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List"/>
+    FROM mmall_category
+    ORDER BY id ASC
+  </select>
+  
 </mapper>

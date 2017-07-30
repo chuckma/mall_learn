@@ -17,7 +17,6 @@ import com.mall.util.PropertiesUtil;
 import com.mall.vo.ProductDetailVo;
 import com.mall.vo.ProductListVo;
 import org.apache.commons.lang3.StringUtils;
-import org.omg.CORBA.Object;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

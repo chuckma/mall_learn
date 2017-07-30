@@ -4,6 +4,9 @@ import com.mall.pojo.Category;
 
 import java.util.List;
 
+/**
+ * Created by Andy on 2017/7/30.
+ */
 public interface CategoryMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -17,5 +20,5 @@ public interface CategoryMapper {
 
     int updateByPrimaryKey(Category record);
 
-    List<Category> selectCategoryChildrenByParentId(Integer parent_id);
+    List<Category> selectCategoryChildrenByParentId(Integer parentId);
 }
