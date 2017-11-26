@@ -6,9 +6,7 @@ import com.google.common.collect.Maps;
 import com.mall.common.ServerResponse;
 import com.mall.dao.ShippingMapper;
 import com.mall.pojo.Shipping;
-import com.mall.pojo.User;
 import com.mall.service.IShippingService;
-import com.sun.corba.se.spi.activation.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,4 +71,5 @@ public class ShippingServiceImpl implements IShippingService {
         return ServerResponse.createBySuccess(pageInfo);
 
     }
+
 }
