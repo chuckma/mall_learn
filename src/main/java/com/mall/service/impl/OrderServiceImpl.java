@@ -438,7 +438,7 @@ public class OrderServiceImpl implements IOrderService {
                 dumpResponse(response);
 
                 File folder = new File(path);
-                if (folder.exists()) {
+                if (!folder.exists()) {
                     folder.setWritable(true);
                     folder.mkdirs();
                 }
