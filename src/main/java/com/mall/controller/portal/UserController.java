@@ -5,7 +5,8 @@ import com.mall.common.ResponseCode;
 import com.mall.common.ServerResponse;
 import com.mall.pojo.User;
 import com.mall.service.IUserService;
-import org.omg.CORBA.Object;
+import com.mall.util.JsonUtil;
+import com.mall.util.RedisPoolUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -38,7 +39,8 @@ public class UserController {
         ServerResponse<User> response = iUserService.login(username, password);
         if (response.isSuccess()) {
             // Const常量类 Const.CURRENT_USER  作为session的key
-            session.setAttribute(Const.CURRENT_USER, response.getData());
+//            session.setAttribute(Const.CURRENT_USER, response.getData());
+            RedisPoolUtil.setEx(session.getId(), JsonUtil.obj2String(response.getData()), Const.RedisCacheExtime.REDIS_SESSION_EXTIME);
         }
         return response;
     }
@@ -47,7 +49,7 @@ public class UserController {
      * 登出
      *
      * @param session
-     * @return
+     * @returng
      */
     @RequestMapping(value = "logout.do", method = RequestMethod.POST)
     @ResponseBody
