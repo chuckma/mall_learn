@@ -53,7 +53,7 @@ public class UserController {
     /**
      * 登出
      *
-     * @param session
+     * @param
      * @returng
      */
     @RequestMapping(value = "logout.do", method = RequestMethod.POST)
@@ -95,7 +95,7 @@ public class UserController {
     /**
      * 获取用户信息
      *
-     * @param session
+     * @param
      * @return
      */
     @RequestMapping(value = "get_user_info.do", method = RequestMethod.POST)
