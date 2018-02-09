@@ -119,6 +119,7 @@ public class CartServiceImpl implements ICartService {
                 cartProductVo.setUserId(userId);
                 cartProductVo.setProductId(cartItem.getProductId());
 
+                // 查询购物车里的产品对象
                 Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
                 if (product != null) {
                     cartProductVo.setProductMainImage(product.getMainImage());
