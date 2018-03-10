@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PreDestroy;
+
 /**
  * Created by Charles Date:2018/3/9
  */
@@ -20,6 +22,11 @@ public class CloseOrderTask {
 
     @Autowired
     private IOrderService iOrderService;
+
+    @PreDestroy
+    public void delLock(){
+        RedisShardedPoolUtil.del(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
+    }
 
    // @Scheduled(cron = "0 */1 * * * ?")// 每 1 分钟执行一次 (1 分钟的整数倍)
     public void closeOrderTaskV1() {
