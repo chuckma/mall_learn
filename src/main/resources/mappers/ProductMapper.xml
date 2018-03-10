@@ -213,4 +213,14 @@
       </foreach>
     </if>
   </select>
+
+  <select id="selectStockByProductId" resultType="int" parameterType="java.lang.Integer">
+    SELECT
+    stock
+    FROM mmall_product
+    where id = #{id}
+    for UPDATE
+  </select>
+
+
 </mapper>
