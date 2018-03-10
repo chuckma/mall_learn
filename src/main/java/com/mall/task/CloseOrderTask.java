@@ -37,7 +37,7 @@ public class CloseOrderTask {
     }
 
 
-    @Scheduled(cron = "0 */1 * * * ?")// 每 1 分钟执行一次 (1 分钟的整数倍)
+    // @Scheduled(cron = "0 */1 * * * ?")// 每 1 分钟执行一次 (1 分钟的整数倍)
     public void closeOrderTaskV2() {
         log.info("关闭订单定时任务启动");
         long lockTimeOut = Long.parseLong(PropertiesUtil.getProperty("lock.timeout","5000"));
