@@ -105,15 +105,27 @@ public class RedisPoolUtil {
     public static void main(String[] args) {
         Jedis jedis = RedisPool.getJedis();
 
-        RedisShardedPoolUtil.set("keytest", "value");
+//        RedisShardedPoolUtil.set("keytest", "value");
+//
+//        String value = RedisShardedPoolUtil.get("keytest");
+//
+//        RedisShardedPoolUtil.setEx("keyex", "valueex", 60 * 10);
+//
+//        RedisShardedPoolUtil.expire("keytest", 60 * 20);
+//
+//        RedisShardedPoolUtil.del("keytest");
 
-        String value = RedisShardedPoolUtil.get("keytest");
 
-        RedisShardedPoolUtil.setEx("keyex", "valueex", 60 * 10);
 
-        RedisShardedPoolUtil.expire("keytest", 60 * 20);
+        RedisPoolUtil.set("keytest", "value");
 
-        RedisShardedPoolUtil.del("keytest");
+        String value = RedisPoolUtil.get("keytest");
+
+        RedisPoolUtil.setEx("keyex", "valueex", 60 * 10);
+
+        RedisPoolUtil.expire("keytest", 60 * 20);
+
+        RedisPoolUtil.del("keytest");
 
         System.out.println("end");
 
