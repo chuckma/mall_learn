@@ -7,6 +7,7 @@ import com.mall.service.IEngineerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -32,7 +33,7 @@ public class EngineerManagerController {
         return this.iEngineerService.engineerList(pageNum, pageSize);
     }
 
-    @RequestMapping("add.do")
+    @RequestMapping(value = "add.do",method = RequestMethod.POST)
     @ResponseBody
     public ServerResponse<String> add(Engineer engineer) {
         return iEngineerService.addEngineer(engineer);
