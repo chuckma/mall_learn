@@ -2,6 +2,7 @@ package com.mall.controller.backend;
 
 import com.github.pagehelper.PageInfo;
 import com.mall.common.ServerResponse;
+import com.mall.pojo.Engineer;
 import com.mall.service.IEngineerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -30,4 +31,11 @@ public class EngineerManagerController {
         //
         return this.iEngineerService.engineerList(pageNum, pageSize);
     }
+
+    @RequestMapping("add.do")
+    @ResponseBody
+    public ServerResponse<String> add(Engineer engineer) {
+        return iEngineerService.addEngineer(engineer);
+    }
+
 }

@@ -31,4 +31,12 @@ public class EngineerServiceImpl implements IEngineerService {
 
     }
 
+    public ServerResponse<String> addEngineer(Engineer engineer) {
+        int resultCount = engineerMapper.insert(engineer);
+        if (resultCount == 0) {
+            return ServerResponse.createByErrorMessage("添加失败");
+        }
+        return ServerResponse.createBySuccessMessage("添加成功");
+    }
+
 }
