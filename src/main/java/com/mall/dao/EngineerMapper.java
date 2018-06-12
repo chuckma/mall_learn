@@ -18,4 +18,6 @@ public interface EngineerMapper {
     int updateByPrimaryKey(Engineer record);
 
     List<Engineer> selectEngineerAll();
+
+    int deleteByUserName(String userName);
 }

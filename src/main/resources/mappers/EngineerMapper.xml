@@ -148,4 +148,9 @@
     from t_engineer
     order by id
   </select>
+
+  <delete id="deleteByUserName" parameterType="java.lang.String">
+    delete from  t_engineer
+    where name=#{name jdbcType=VARCHAR}
+  </delete>
 </mapper>

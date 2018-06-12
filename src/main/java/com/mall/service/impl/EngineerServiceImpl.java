@@ -39,4 +39,13 @@ public class EngineerServiceImpl implements IEngineerService {
         return ServerResponse.createBySuccessMessage("添加成功");
     }
 
+
+    public ServerResponse<String> deleteEngineer(String userName) {
+        int res = engineerMapper.deleteByUserName(userName);
+        if (res == 0) {
+            return ServerResponse.createByErrorMessage("删除失败!");
+        }
+        return ServerResponse.createBySuccessMessage("删除成功！");
+    }
+
 }
