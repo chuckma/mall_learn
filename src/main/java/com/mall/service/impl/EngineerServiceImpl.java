@@ -48,4 +48,13 @@ public class EngineerServiceImpl implements IEngineerService {
         return ServerResponse.createBySuccessMessage("删除成功！");
     }
 
+
+    public ServerResponse<Engineer> getEngineer(Integer userId) {
+        Engineer engineer = engineerMapper.selectByPrimaryKey(userId);
+        if (engineer == null) {
+            return ServerResponse.createByErrorMessage("抱歉，没有该用户信息");
+        }
+        return ServerResponse.createBySuccess(engineer);
+    }
+
 }

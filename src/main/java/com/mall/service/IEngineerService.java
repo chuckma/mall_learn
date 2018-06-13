@@ -11,4 +11,6 @@ public interface IEngineerService {
     ServerResponse<String> addEngineer(Engineer engineer);
 
     ServerResponse<String> deleteEngineer(String userName);
+
+    ServerResponse<Engineer> getEngineer(Integer userId);
 }
