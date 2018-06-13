@@ -83,4 +83,28 @@ public class EngineerManagerController {
         return iEngineerService.deleteEngineer(userName);
     }
 
+    /**
+     * 获取一条信息
+     * @param httpServletRequest
+     * @param userId
+     * @return
+     */
+    @RequestMapping(value = "get_engineer.do", method = RequestMethod.POST)
+    @ResponseBody
+    public ServerResponse<Engineer> getEngineer(HttpServletRequest httpServletRequest,Integer userId) {
+//        String userId = StringUtils.trimToEmpty(httpServletRequest.getParameter("userId"));
+        String loginToken = CookieUtil.readLoginToken(httpServletRequest);
+        if (StringUtils.isEmpty(loginToken)) {
+            return ServerResponse.createByErrorMessage("用户未登录,无法获取当前用户信息");
+        }
+
+        String userJsonStr = RedisShardedPoolUtil.get(loginToken);
+        User currentUser = JsonUtil.string2Obj(userJsonStr, User.class);
+        if (currentUser == null) {
+            return ServerResponse.createByErrorCodeMessage(ResponseCode.NEED_LOGIN.getCode(), "未登录,需要强制登录status=10");
+        }
+        return iEngineerService.getEngineer(userId);
+    }
+
+
 }
