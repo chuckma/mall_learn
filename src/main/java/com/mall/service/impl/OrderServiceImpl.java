@@ -402,7 +402,7 @@ public class OrderServiceImpl implements IOrderService {
 
         List<OrderItem> orderItemList = orderItemMapper.getByOrderNoUserId(orderNo, userId);
         for (OrderItem orderItem : orderItemList) {
-            GoodsDetail goods1 = GoodsDetail.newInstance(orderItem.getProductId().toString().toString(), orderItem.getProductName(),
+            GoodsDetail goods1 = GoodsDetail.newInstance(orderItem.getProductId().toString(), orderItem.getProductName(),
                     BigDecimalUtil.mul(orderItem.getCurrentUnitPrice().doubleValue(), new Double(100).doubleValue()).longValue(),
                     orderItem.getQuantity());
             goodsDetailList.add(goods1);
@@ -517,7 +517,7 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-    public ServerResponse queryOrderPayStatus(Integer userId, Long orderNo) {
+    public ServerResponse  queryOrderPayStatus(Integer userId, Long orderNo) {
 
         Order order = orderMapper.selectByUserIdAndOrderNo(userId, orderNo);
         if (order == null) {
