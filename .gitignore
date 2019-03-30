@@ -11,7 +11,7 @@
 
 #maven
 
-target
+target/
 
 #eclipse
 
@@ -43,4 +43,4 @@ Thumbs.db
 
 
 
-!/target/
+/target
