@@ -319,6 +319,7 @@
         <profile>
             <id>dev</id>
             <activation>
+                <!--默认的编译环境-->
                 <activeByDefault>true</activeByDefault>
             </activation>
             <properties>
