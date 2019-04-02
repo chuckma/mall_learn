@@ -59,7 +59,9 @@ public class CloseOrderTask {
         log.info("关闭订单定时任务结束");
     }
 
-
+    /**
+     *  Redis 实现的 分布式锁
+     */
     @Scheduled(cron = "0 */1 * * * ?")// 每 1 分钟执行一次 (1 分钟的整数倍)
     public void closeOrderTaskV3() {
         log.info("关闭订单定时任务启动");
@@ -72,7 +74,7 @@ public class CloseOrderTask {
             String lockValueStr = RedisShardedPoolUtil.get(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
             // 若果当前的获取到的 lockValueStr 不为空，并且当前的时间 > lockValueStr ，说明这个锁已经超时了，是可以获取锁的。
             if (lockValueStr != null && System.currentTimeMillis() > Long.parseLong(lockValueStr)) {
-                // 重新上锁
+                // 重置分布式锁
                 String getSetResult = RedisShardedPoolUtil.getSet(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, String.valueOf(System.currentTimeMillis() + lockTimeOut));
                 //再次用当前时间戳getSet
                 //返回给定的 key 旧值, > 旧值判断,是否可以获取锁
@@ -95,6 +97,9 @@ public class CloseOrderTask {
         log.info("关闭订单定时任务结束");
     }
 
+    /**
+     * Redisson 分布式锁
+     */
    //  @Scheduled(cron = "0 */1 * * * ?")// 每 1 分钟执行一次 (1 分钟的整数倍)
     public void closeOrderTaskV4() {
 
