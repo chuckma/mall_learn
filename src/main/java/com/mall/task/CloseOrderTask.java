@@ -70,13 +70,19 @@ public class CloseOrderTask {
         } else {
             // 未获取到锁,继续判断时间戳,看是否可以重置并获取到锁
             String lockValueStr = RedisShardedPoolUtil.get(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
+            // 若果当前的获取到的 lockValueStr 不为空，并且当前的时间 > lockValueStr ，说明这个锁已经超时了，是可以获取锁的。
             if (lockValueStr != null && System.currentTimeMillis() > Long.parseLong(lockValueStr)) {
+                // 重新上锁
                 String getSetResult = RedisShardedPoolUtil.getSet(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK, String.valueOf(System.currentTimeMillis() + lockTimeOut));
                 //再次用当前时间戳getSet
                 //返回给定的 key 旧值, > 旧值判断,是否可以获取锁
                 //当 key 没有旧值得时候, 即key 不存在的时候,返回 nil -> 获取锁
                 //这里我们set了一个新的value 值,获取旧的值
                 if (getSetResult == null || (getSetResult != null && StringUtils.equals(lockValueStr, getSetResult))) {
+                    /**
+                     * getSetResult != null && StringUtils.equals(lockValueStr, getSetResult)
+                     * 重新设置锁的过程中，锁没有变化,可以获取锁
+                     */
                     //真正获取到锁
                     closeOrder(Const.REDIS_LOCK.CLOSE_ORDER_TASK_LOCK);
                 } else {
