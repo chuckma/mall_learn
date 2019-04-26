@@ -76,6 +76,7 @@ public class OrderServiceImpl implements IOrderService {
         if (!serverResponse.isSuccess()) {
             return serverResponse;
         }
+        // 查询订单明细集合
         List<OrderItem> orderItemList = (List<OrderItem>) serverResponse.getData();
         BigDecimal payment = this.getOrderTotalPrice(orderItemList);
 
@@ -190,9 +191,9 @@ public class OrderServiceImpl implements IOrderService {
         long orderNo = this.generateOrderNo();
         order.setOrderNo(orderNo);
         order.setStatus(Const.OrderStatusEnum.NO_PAY.getCode());
-        order.setPostage(0);
-        order.setPaymentType(Const.PaymentTypeEnum.ONLINE_PAY.getCode());
-        order.setPayment(payment);
+        order.setPostage(0); // 运费
+        order.setPaymentType(Const.PaymentTypeEnum.ONLINE_PAY.getCode());//支付类型
+        order.setPayment(payment);// 实际需要付款的金额
 
         order.setUserId(userId);
         order.setShippingId(shippingId);
@@ -215,7 +216,11 @@ public class OrderServiceImpl implements IOrderService {
     }
 
 
-
+    /**
+     * 计算订单总价格
+     * @param orderItemList 订单明细集合
+     * @return
+     */
     private BigDecimal getOrderTotalPrice(List<OrderItem> orderItemList) {
         BigDecimal payment = new BigDecimal("0");
         for (OrderItem orderItem : orderItemList) {
@@ -232,6 +237,7 @@ public class OrderServiceImpl implements IOrderService {
         }
         // 校验购物车数据,产品状态和数量
         for (Cart cartItem : cartList) {
+            // 订单明细
             OrderItem orderItem = new OrderItem();
             Product product = productMapper.selectByPrimaryKey(cartItem.getProductId());
             if (Const.ProductStatusEnum.ON_SALE.getCode() != product.getStatus()) {

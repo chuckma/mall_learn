@@ -40,6 +40,12 @@ public class OrderController {
     private IOrderService iOrderService;
 
 
+    /**
+     * 创建订单
+     * @param httpServletRequest
+     * @param shippingId
+     * @return
+     */
     @RequestMapping("create.do")
     @ResponseBody
     public ServerResponse create(HttpServletRequest httpServletRequest, Integer shippingId){
@@ -58,6 +64,12 @@ public class OrderController {
     }
 
 
+    /**
+     * 取消订单
+     * @param httpServletRequest
+     * @param orderNo
+     * @return
+     */
     @RequestMapping("cancel.do")
     @ResponseBody
     public ServerResponse cancel(HttpServletRequest httpServletRequest, Long orderNo){
@@ -76,6 +88,11 @@ public class OrderController {
     }
 
 
+    /**
+     * 获取购物车里已经选中的产品，用户在预览的时候看到的购物车明细
+     * @param httpServletRequest
+     * @return
+     */
     @RequestMapping("get_order_cart_product.do")
     @ResponseBody
     public ServerResponse getOrderCartProduct(HttpServletRequest httpServletRequest){
@@ -94,7 +111,12 @@ public class OrderController {
     }
 
 
-
+    /**
+     * 查询订单详情
+     * @param httpServletRequest
+     * @param orderNo
+     * @return
+     */
     @RequestMapping("detail.do")
     @ResponseBody
     public ServerResponse detail(HttpServletRequest httpServletRequest,Long orderNo){
@@ -112,6 +134,14 @@ public class OrderController {
         return iOrderService.getOrderDetail(user.getId(),orderNo);
     }
 
+
+    /**
+     * 查询所有订单
+     * @param httpServletRequest
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
     @RequestMapping("list.do")
     @ResponseBody
     public ServerResponse list(HttpServletRequest httpServletRequest, @RequestParam(value = "pageNum",defaultValue = "1") int pageNum, @RequestParam(value = "pageSize",defaultValue = "10") int pageSize){
